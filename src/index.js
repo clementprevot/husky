@@ -109,7 +109,7 @@ module.exports = {
 
       // Run script
       'export GIT_PARAMS="$*"',
-      'npm run ' + cmd,
+      'npm run ${NPM_FLAGS} ' + cmd,
       'if [ $? -ne 0 ]; then',
       '  echo',
       '  echo "husky - ' + name + ' hook failed (add --no-verify to bypass)"',
