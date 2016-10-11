@@ -35,7 +35,7 @@ module.exports = {
     var packageDir = path.join(__dirname, '..', '..', '..')
     var package = JSON.parse(fs.readFileSync(path.resolve(packageDir, 'package.json')))
 
-    var config = package && package.config && package.config.husky || {}
+    var config = package && package.config && package.config.husky || { flags: '' }
 
     // dir being .git/hooks
     var projectDir = path.join(dir, '..', '..')
@@ -112,7 +112,7 @@ module.exports = {
 
       // Run script
       'export GIT_PARAMS="$*"',
-      'npm run ' + config.flags + ' ' + cmd,
+      'npm run ' + (config.flags || '') + ' ' + cmd,
       'if [ $? -ne 0 ]; then',
       '  echo',
       '  echo "husky - ' + name + ' hook failed (add --no-verify to bypass)"',
